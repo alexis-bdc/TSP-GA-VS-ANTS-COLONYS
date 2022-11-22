@@ -6,14 +6,23 @@
 import math
 import sys
 import random
+import numpy as np
 from ants import *
 from city import *
 
-Len_colony = 100
-matrix  = []#matriz de (bajo diagonal) deseabilidad /  (sobre diagonal) feromonas
 
 
 file = sys.argv[1]
+Len_colony = 100
+matrix = []
+
+class Nodo ():
+    def __init__(self, ph, de, city1_index, city2_index):
+        self.pheromone = ph
+        self.deseability = de
+        self.city1_index = city1_index
+        self.city2_index = city2_index
+        
 
 if __name__ == '__main__':
 
@@ -27,15 +36,18 @@ if __name__ == '__main__':
     f.close()
 
 
+
+
     for i in range (len(list)): #crea la matriz de feromonas
         matrix.append([])
         for j in range (len(list)):
+            aux = Nodo
             if (i==j): #si es diagonal no necesita valor
-                matrix[i][j] = 0
+                matrix[i][j].append(aux(0.0,-1,0.0,i,j))
             if (i>j): #si esta bajo diagonal, corresponde a deseadibilidad
-                matrix[i][j] = 1/list[i].distanceTo(list[j])
-            else: #si esta sobre diagonal, corresponde a feromonas
-                matrix[i][j] = 1
+                matrix[i][j].append(aux(0.0, 1/list[i].distanceTo(list[j]), i,j))
+            # else: #si esta sobre diagonal, corresponde a feromonas
+            #     matrix[i][j].append(aux(0.0, 1/list[i].distanceTo(list[j]), j,i))
 
     for i in range (0,Len_colony):
         colony[i] = ant(list) #crea la colonia de hormigas
@@ -44,5 +56,7 @@ if __name__ == '__main__':
 
     #iteramos soluciones de la colonia 
     #todo: definir criterio de parada
-    for ant in colony:
-        ant.setRoute(matrix)
+
+
+    # for ant in colony:
+    #     ant.setRoute(matrix)
