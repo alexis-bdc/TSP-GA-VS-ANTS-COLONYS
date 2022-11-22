@@ -1,6 +1,7 @@
 # ants colony optimization algorithm for TSP problem
 # version 0.1
 # author: alexis-bdc
+# functions related from: https://en.wikipedia.org/wiki/Ant_colony_optimization_algorithms
 
 import math
 import sys
@@ -37,9 +38,11 @@ if __name__ == '__main__':
                 matrix[i][j] = 1
 
     for i in range (0,Len_colony):
-        colony = ants.ant(list) #crea la colonia de hormigas
+        colony[i] = ant(list) #crea la colonia de hormigas
+
 
 
     #iteramos soluciones de la colonia 
+    #todo: definir criterio de parada
     for ant in colony:
-        ant.setRoute()
+        ant.setRoute(matrix)

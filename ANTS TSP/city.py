@@ -27,5 +27,8 @@ class City:
         distance = math.sqrt((xDistance*xDistance) + (yDistance*yDistance))
         return distance
 
+    def prob_transicion(self, city, list):
+        
+
     def __repr__(self):
         return str(self.getX()) + ", " + str(self.getY())
