@@ -14,6 +14,7 @@ from city import *
 
 file = sys.argv[1]
 Len_colony = 100
+tasa_dispercion = 0.2
 matrix = []
 
 class Nodo ():
@@ -35,9 +36,6 @@ if __name__ == '__main__':
       list.append(eval(line))
     f.close()
 
-
-
-
     for i in range (len(list)): #crea la matriz de feromonas
         matrix.append([])
         for j in range (len(list)):
@@ -57,6 +55,10 @@ if __name__ == '__main__':
     #iteramos soluciones de la colonia 
     #todo: definir criterio de parada
 
+    for i in range (0,Len_colony):  #iteramos hormigas para que recorrar n ciudades
+        for ant in colony:          #iteramos cada hormiga de la colonia
+            ant.setRoute(matrix)
 
-    # for ant in colony:
-    #     ant.setRoute(matrix)
+    colony.sort(key=lambda x: x.distance, reverse=True) #ordenamos la colonia segun distancia recorrida
+    for ant in colony:
+        print(str(ant.route_indexs, ant.distance), "\n")

@@ -11,6 +11,7 @@ class ant:
         self.list = list
         self.route_indexs = []
         self.tovisit_indexs = []
+        self.distance = 0
 
 
 
@@ -58,6 +59,7 @@ class ant:
                         index2 = i
 
             #update pheromona
+            self.distance += list[index1].distanceTo(list[index2])
             self.updatePheromone(matrix, index1, index2)
 
 
