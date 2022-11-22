@@ -3,10 +3,10 @@
 # author: alexis-bdc
 # functions related from: https://en.wikipedia.org/wiki/Ant_colony_optimization_algorithms
 
-import math
+#import math
 import sys
-import random
-import numpy as np
+#import random
+#import numpy as np
 from ants import *
 from city import *
 
@@ -23,12 +23,18 @@ class Nodo ():
         self.deseability = de
         self.city1_index = city1_index
         self.city2_index = city2_index
+    
+    def __str__(self):
+        return "pheromone: " + str(self.pheromone) + " deseability: " + str(self.deseability) + " city1_index: " + str(self.city1_index) + " city2_index: " + str(self.city2_index)
+    
+    
         
 
 if __name__ == '__main__':
 
     list = []
     colony = []
+    cities = []
 
     # Import list of tups from file
     f = open(str(file),"r")
@@ -36,19 +42,30 @@ if __name__ == '__main__':
       list.append(eval(line))
     f.close()
 
-    for i in range (len(list)): #crea la matriz de feromonas
-        matrix.append([])
-        for j in range (len(list)):
-            aux = Nodo
-            if (i==j): #si es diagonal no necesita valor
-                matrix[i][j].append(aux(0.0,-1,0.0,i,j))
-            if (i>j): #si esta bajo diagonal, corresponde a deseadibilidad
-                matrix[i][j].append(aux(0.0, 1/list[i].distanceTo(list[j]), i,j))
-            # else: #si esta sobre diagonal, corresponde a feromonas
-            #     matrix[i][j].append(aux(0.0, 1/list[i].distanceTo(list[j]), j,i))
+    # Create cities
+    for i in range(len(list)):
+        cities.append(City(list[i][0], list[i][1]))
 
+
+
+
+    #create matrix of nodes that contain pheromone and deseability
+    for i in range(len(cities)):
+        array = []
+        for j in range(len(cities)):
+            if (i==j): #si es diagonal no necesita valor
+                aux = Nodo(1,1, i,j)
+                array.append(aux)
+            if (i>j): #si esta bajo diagonal, corresponde a deseadibilidad
+                aux = Nodo(1, 1/cities[i].distanceTo(cities[j]), i,j)
+                array.append(aux)
+        matrix.append(array)
+
+
+    #create ants colony
     for i in range (0,Len_colony):
-        colony[i] = ant(list) #crea la colonia de hormigas
+        hormiga = Ant(cities)
+        colony.append(hormiga) #add new ant to colony
 
 
 
@@ -56,9 +73,9 @@ if __name__ == '__main__':
     #todo: definir criterio de parada
 
     for i in range (0,Len_colony):  #iteramos hormigas para que recorrar n ciudades
-        for ant in colony:          #iteramos cada hormiga de la colonia
-            ant.setRoute(matrix)
+        for i in range (len(colony)):          #iteramos cada hormiga de la colonia
+            colony[i].setRoute(matrix)
 
     colony.sort(key=lambda x: x.distance, reverse=True) #ordenamos la colonia segun distancia recorrida
     for ant in colony:
-        print(str(ant.route_indexs, ant.distance), "\n")
+        print("ruta: ", str(ant.route_indexs)," distancia: ", str(ant.distance), "\n")
