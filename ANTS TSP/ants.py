@@ -25,10 +25,12 @@ class Ant:
 
     def setRoute(self,matrix):
         #inicia la ruta con un nodo aleatorio
-        if len(self.route_indexs) == 0:
+        if self.route_indexs == []:
+            #print("route empty")
             first = self.tovisit_indexs.pop(random.randint(0,len(self.tovisit_indexs)-1))
             self.route_indexs.append(first)
-        else:
+        if self.tovisit_indexs != []:
+            #print("route indexing new city")
             mayor = 0
             index1 = self.route_indexs[-1]
             index2 = 0
@@ -47,7 +49,7 @@ class Ant:
                         mayor = self.prob_salto(matrix, index2, index1)
                         rm = i
 
-
+            
             self.route_indexs.append(self.tovisit_indexs.pop(rm))
 
             self.distance += self.cities[index1].distanceTo(self.cities[index2])
@@ -57,7 +59,7 @@ class Ant:
 
 
     def __repr__(self):
-        return str(self.route_indexs) + " " + str(self.distance)
+        return "route: " + str(self.route_indexs) + " distance: " + str(self.distance)
   
 
     def updatePheromone(self, matrix, index1, index2):

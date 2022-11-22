@@ -13,7 +13,7 @@ from city import *
 
 
 file = sys.argv[1]
-Len_colony = 100
+Len_colony = 50
 tasa_dispercion = 0.2
 matrix = []
 
@@ -77,5 +77,5 @@ if __name__ == '__main__':
             colony[i].setRoute(matrix)
 
     colony.sort(key=lambda x: x.distance, reverse=True) #ordenamos la colonia segun distancia recorrida
-    for ant in colony:
-        print("ruta: ", str(ant.route_indexs)," distancia: ", str(ant.distance), "\n")
+    for i in range (len(colony)):
+        print("hormiga:",i, " ", colony[i])
