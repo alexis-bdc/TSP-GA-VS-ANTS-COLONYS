@@ -1,5 +1,5 @@
 # ants colony optimization algorithm for TSP problem
-# version 0.1
+# version 1.0
 # author: alexis-bdc
 # functions related from: https://en.wikipedia.org/wiki/Ant_colony_optimization_algorithms
 
