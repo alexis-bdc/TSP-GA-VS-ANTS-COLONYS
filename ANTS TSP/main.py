@@ -76,6 +76,15 @@ if __name__ == '__main__':
         for i in range (len(colony)):          #iteramos cada hormiga de la colonia
             colony[i].setRoute(matrix)
 
+    
+
+    #print results
+    # print("final matrix: ")
+    # for arrow in matrix:
+    #     for node in arrow:
+    #         print(node)
+
+    print("Colony results:")
     colony.sort(key=lambda x: x.distance, reverse=True) #ordenamos la colonia segun distancia recorrida
     for i in range (len(colony)):
         print("hormiga:",i, " ", colony[i])
