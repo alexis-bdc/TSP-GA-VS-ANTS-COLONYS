@@ -1,4 +1,4 @@
-import math
+#import math
 import random
 from city import *
 from main import *

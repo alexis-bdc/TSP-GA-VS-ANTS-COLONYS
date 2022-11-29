@@ -11,8 +11,8 @@
 #****************************************************************************************************
 import math
 import random
-import matplotlib.pyplot as plt
-import pandas as pd
+# import matplotlib.pyplot as plt
+# import pandas as pd
 from map import *
 from GA import *
 import sys
@@ -32,15 +32,15 @@ if __name__ == '__main__':
       list.append(eval(line))
    f.close()
 
-   #plot initial cities
-   for i in range (len(list)):
-      plt.plot(list[i][0],list[i][1],color="red",marker="o",linestyle="None")
-   plt.title("initial cities")
-   plt.xlim(0,200)
-   plt.ylim(0,200)
-   plt.xlabel("x")
-   plt.ylabel("y")
-   plt.show
+   # #plot initial cities
+   # for i in range (len(list)):
+   #    plt.plot(list[i][0],list[i][1],color="red",marker="o",linestyle="None")
+   # plt.title("initial cities")
+   # plt.xlim(0,200)
+   # plt.ylim(0,200)
+   # plt.xlabel("x")
+   # plt.ylabel("y")
+   # plt.show
    
 
    # Create and add cities

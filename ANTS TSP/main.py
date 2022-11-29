@@ -13,7 +13,7 @@ from city import *
 
 
 file = sys.argv[1]
-Len_colony = 50
+Len_colony = 1000
 tasa_dispercion = 0.2
 matrix = []
 
