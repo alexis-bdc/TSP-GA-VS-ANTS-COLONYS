@@ -48,7 +48,6 @@ if __name__ == '__main__':
 
 
 
-
     #create matrix of nodes that contain pheromone and deseability
     for i in range(len(cities)):
         array = []
@@ -72,11 +71,12 @@ if __name__ == '__main__':
     #iteramos soluciones de la colonia 
     #todo: definir criterio de parada
 
+
     for i in range (0,Len_colony):  #iteramos hormigas para que recorrar n ciudades
         for i in range (len(colony)):          #iteramos cada hormiga de la colonia
             colony[i].setRoute(matrix)
 
-    
+
 
     #print results
     # print("final matrix: ")
@@ -84,7 +84,11 @@ if __name__ == '__main__':
     #     for node in arrow:
     #         print(node)
 
+
     print("Colony results:")
     colony.sort(key=lambda x: x.distance, reverse=True) #ordenamos la colonia segun distancia recorrida
-    for i in range (len(colony)):
-        print("hormiga:",i, " ", colony[i])
+    # for i in range (len(colony)):
+    #     print("hormiga:",i, " ", colony[i])
+    print("best ants: ", colony[0])
+
+    

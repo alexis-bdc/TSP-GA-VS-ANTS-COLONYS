@@ -1,9 +1,4 @@
 #****************************************************************************************************
-#to plot GA
-#save output data into a xml file
-#data: cities -> generation -> gen[order] -> total distance
-#
-#to make a ploting in the end
 #
 #  dev: alexis-bdc
 #  based on: https://github.com/kairess/traveling-salesman-problem
@@ -11,6 +6,7 @@
 #****************************************************************************************************
 import math
 import random
+import numpy as np
 # import matplotlib.pyplot as plt
 # import pandas as pd
 from map import *
@@ -19,28 +15,22 @@ import sys
 
 #file with cities is the first argument
 file = sys.argv[1]
+populationSize = 100
+generations = 50
+var = 0.001
+
+
 
 if __name__ == '__main__':
 
    tourmanager = TourManager()
    list = []
-   
   
    f = open(str(file),"r")
    # Import list of tups from file
    for line in f:
       list.append(eval(line))
    f.close()
-
-   # #plot initial cities
-   # for i in range (len(list)):
-   #    plt.plot(list[i][0],list[i][1],color="red",marker="o",linestyle="None")
-   # plt.title("initial cities")
-   # plt.xlim(0,200)
-   # plt.ylim(0,200)
-   # plt.xlabel("x")
-   # plt.ylabel("y")
-   # plt.show
    
 
    # Create and add cities
@@ -50,17 +40,52 @@ if __name__ == '__main__':
    
    
    # Initialize population
-   pop = Population(tourmanager, 50, True);
+
+   pop = Population(tourmanager, populationSize, True);
    print ("Initial distance: " + str(pop.getFittest().getDistance()))
    
-   # Evolve population for 50 generations
    ga = GA(tourmanager)
-   pop = ga.evolvePopulation(pop)
-   for i in range(0, 100):
+   TopGeneraciondistance = []
+   TopGeneracionroute = []
+
+   # Evolve population for [generations]
+
+   for i in range(0, generations):
       pop = ga.evolvePopulation(pop)
+      TopGeneracionroute.append(pop.getFittest())
+      TopGeneraciondistance.append(math.floor(TopGeneracionroute[-1].getDistance()))
+
+   # Evolve populatiion untill last 10 generation varianza is less than [var]
    
+   while (np.var(TopGeneraciondistance[-5:]) >= var):
+      # print("generacion: ",generations)
+      pop = ga.evolvePopulation(pop)
+      TopGeneracionroute.append(pop.getFittest())
+      TopGeneraciondistance.append(math.floor(TopGeneracionroute[-1].getDistance()))
+      generations += 1
+
+      
+
+   # Evolve population untill solution repeats n times
+
+   # n = 100
+   # ga = GA(tourmanager)
+   # pop = ga.evolvePopulation(pop)
+   # currentfittest = pop.getFittest()
+   # fittestDistance = currentfittest.getDistance()
+   # while i < n:
+   #    print ("i = ", i)
+   #    pop = ga.evolvePopulation(pop)
+   #    if fittestDistance >= pop.getFittest().getDistance():
+   #       i += 1
+   #    else:
+   #       i = 0
+   #       currentfittest = pop.getFittest()
+   #       fittestDistance = currentfittest.getDistance()   
+   
+
    # Print final results
-   print ("Finished")
-   print ("Final distance: " + str(pop.getFittest().getDistance()))
+   print ("needed generations: ", generations)
+   print ("Final distance: " + str(TopGeneraciondistance[-1]))
    print ("Solution:")
-   print (pop.getFittest())
+   print (TopGeneracionroute[-1])

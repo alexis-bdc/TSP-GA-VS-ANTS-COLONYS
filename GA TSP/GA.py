@@ -2,14 +2,16 @@ import math
 import random
 from map import *
 
+
 class Population:
-   def __init__(self, tourmanager, populationSize, initialise):
+   def __init__(self, tourmanager, PopulationSize, initialise):
       self.tours = []
-      for i in range(0, populationSize):
+      for i in range(0, PopulationSize):
          self.tours.append(None)
       
       if initialise:
-         for i in range(0, populationSize):
+         InitialTour = tourmanager
+         for i in range(0, PopulationSize):
             newTour = Tour(tourmanager)
             newTour.generateIndividual()
             self.saveTour(i, newTour)
@@ -51,6 +53,7 @@ class GA:
          newPopulation.saveTour(0, pop.getFittest())
          elitismOffset = 1
       
+      # create new population [1 child at a time, for population size]
       for i in range(elitismOffset, newPopulation.populationSize()):
          parent1 = self.tournamentSelection(pop)
          parent2 = self.tournamentSelection(pop)
@@ -97,7 +100,7 @@ class GA:
    
    def tournamentSelection(self, pop):
       tournament = Population(self.tourmanager, self.tournamentSize, False)
-      for i in range(0, self.tournamentSize):
+      for i in range(0, self.tournamentSize):            
          randomId = int(random.random() * pop.populationSize())
          tournament.saveTour(i, pop.getTour(randomId))
       fittest = tournament.getFittest()
