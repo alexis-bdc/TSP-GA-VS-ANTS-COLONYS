@@ -7,6 +7,7 @@
 import math
 import random
 import numpy as np
+import time
 # import matplotlib.pyplot as plt
 # import pandas as pd
 from map import *
@@ -22,6 +23,7 @@ var = 0.001
 
 
 if __name__ == '__main__':
+   inicio = time.time()
 
    tourmanager = TourManager()
    list = []
@@ -83,9 +85,11 @@ if __name__ == '__main__':
    #       currentfittest = pop.getFittest()
    #       fittestDistance = currentfittest.getDistance()   
    
+   fin = time.time()
 
    # Print final results
    print ("needed generations: ", generations)
    print ("Final distance: " + str(TopGeneraciondistance[-1]))
    print ("Solution:")
+   print ("tiempo de ejecucion: ", fin - inicio)
    print (TopGeneracionroute[-1])

@@ -5,6 +5,7 @@
 
 #import math
 import sys
+import time
 #import random
 #import numpy as np
 from ants import *
@@ -32,6 +33,7 @@ class Nodo ():
 
 if __name__ == '__main__':
 
+    inicio = time.time()
     list = []
     colony = []
     cities = []
@@ -84,11 +86,12 @@ if __name__ == '__main__':
     #     for node in arrow:
     #         print(node)
 
-
+    fin = time.time()
     print("Colony results:")
     colony.sort(key=lambda x: x.distance, reverse=True) #ordenamos la colonia segun distancia recorrida
     # for i in range (len(colony)):
     #     print("hormiga:",i, " ", colony[i])
-    print("best ants: ", colony[0])
+    print("best ants route: ", colony[0])
+    print("tiempo de ejecucion: ", fin-inicio)
 
     

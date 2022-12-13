@@ -59,7 +59,7 @@ class Ant:
 
 
     def __repr__(self):
-        return "route: " + str(self.route_indexs) + " distance: " + str(self.distance)
+        return "route: " + str(self.route_indexs) + "\ndistance: " + str(self.distance)
   
 
     def updatePheromone(self, matrix, index1, index2):
