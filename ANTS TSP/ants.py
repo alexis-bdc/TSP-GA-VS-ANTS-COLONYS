@@ -6,7 +6,6 @@ from main import *
 tasa_dispercion = 0.2
 
 class Ant:
-
     def __init__(self, list):
         self.cities = list
         self.route_indexs = []

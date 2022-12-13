@@ -27,7 +27,7 @@ class City:
       return distance
    
    def __repr__(self):
-      return str(self.getX()) + ", " + str(self.getY())
+      return "(" + str(self.getX()) + "," + str(self.getY()) + ")"
 
 
 

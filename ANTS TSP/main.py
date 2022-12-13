@@ -14,7 +14,7 @@ from city import *
 
 
 file = sys.argv[1]
-Len_colony = 1000
+Len_colony = 10000
 tasa_dispercion = 0.2
 matrix = []
 
@@ -91,7 +91,7 @@ if __name__ == '__main__':
     colony.sort(key=lambda x: x.distance, reverse=True) #ordenamos la colonia segun distancia recorrida
     # for i in range (len(colony)):
     #     print("hormiga:",i, " ", colony[i])
-    print("best ants route: ", colony[0])
+    print("best ants route: ", colony[-1])
     print("tiempo de ejecucion: ", fin-inicio)
 
     
